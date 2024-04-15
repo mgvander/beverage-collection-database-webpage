@@ -2,7 +2,7 @@
 
 ## Author
 
-
+Michael VanderMyde
 
 ## Description
 
@@ -146,8 +146,8 @@ The following Bootstrap documentation should help you figure out how to add some
 
 ## Outside Resources Used
 
-
+None
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-
+None
