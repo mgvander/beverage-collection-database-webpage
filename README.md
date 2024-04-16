@@ -150,4 +150,4 @@ None
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-None
+For development purposes, the program does not use HttpsRedirection(), which leaves the connection insecure.
