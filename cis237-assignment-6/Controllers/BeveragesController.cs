@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using cis237_assignment_6.Models;
 
 namespace cis237_assignment_6.Controllers
-{
+{    
     public class BeveragesController : Controller
     {
         private readonly BeverageContext _context;
@@ -24,7 +25,7 @@ namespace cis237_assignment_6.Controllers
               return View(await _context.Beverages.ToListAsync());
         }
 
-        // GET: Beverages/Details/5
+        // GET: Beverages/Details/5        
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Beverages == null)
@@ -43,6 +44,7 @@ namespace cis237_assignment_6.Controllers
         }
 
         // GET: Beverages/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +53,7 @@ namespace cis237_assignment_6.Controllers
         // POST: Beverages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Pack,Price,Active")] Beverage beverage)
@@ -65,6 +68,7 @@ namespace cis237_assignment_6.Controllers
         }
 
         // GET: Beverages/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Beverages == null)
@@ -83,6 +87,7 @@ namespace cis237_assignment_6.Controllers
         // POST: Beverages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Pack,Price,Active")] Beverage beverage)
@@ -116,6 +121,7 @@ namespace cis237_assignment_6.Controllers
         }
 
         // GET: Beverages/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Beverages == null)
@@ -134,6 +140,7 @@ namespace cis237_assignment_6.Controllers
         }
 
         // POST: Beverages/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
