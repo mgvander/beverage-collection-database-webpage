@@ -151,3 +151,6 @@ None
 ## Known Problems, Issues, And/Or Errors in the Program
 
 For development purposes, the program does not use HttpsRedirection(), which leaves the connection insecure.
+
+For development purposes, remove the requirements for a set length, inclusion of an alphanumeric character, inclusion of a digit, and inclusion of an uppercase letter, in the creation of
+a password.

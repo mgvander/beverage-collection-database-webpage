@@ -37,6 +37,17 @@ namespace cis237_assignment_6
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            // Configure the Identity Password Requirements to be more lax while in development.
+            services.Configure<IdentityOptions>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 1;
+
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
