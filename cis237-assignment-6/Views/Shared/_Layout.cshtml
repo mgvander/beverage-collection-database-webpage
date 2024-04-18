@@ -24,9 +24,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @*Create a nav link to the index og the Beverages Controller*@
+                        @*Create a nav link to the index of the Beverages Controller*@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Beverages" asp-action="Index">Beverage Collection</a>
+                        </li>
+                        @*Create a nav link to the contact page*@
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -42,7 +46,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - cis237_assignment_6 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - cis237_assignment_6 - 
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> |
+            <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
