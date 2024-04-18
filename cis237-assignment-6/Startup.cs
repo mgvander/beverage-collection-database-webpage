@@ -38,15 +38,22 @@ namespace cis237_assignment_6
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            // Configure the Identity Password Requirements to be more lax while in development.
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 1;
+            //// Configure the Identity Password Requirements to be more lax while in development.
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequireUppercase = false;
+            //    options.Password.RequiredLength = 1;
 
-            });
+            //});
+
+            // Configure the Identity Password Requirements to be stricter
+            services.Configure<IdentityOptions>(options =>
+                                                   {
+                                                       options.Password.RequiredLength = 8;
+                                                   }
+                                               );
 
             // Configure the Session
             services.AddDistributedMemoryCache();
@@ -74,7 +81,7 @@ namespace cis237_assignment_6
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

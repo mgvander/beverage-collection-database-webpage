@@ -150,9 +150,8 @@ Database from barnesbrothers.ddns.net
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-For development purposes, the program does not use HttpsRedirection(), which leaves the connection insecure.
+The connection still is not as secure as it could be.
 
-For development purposes, remove the requirements for a set length, inclusion of an alphanumeric character, inclusion of a digit, and inclusion of an uppercase letter, in the creation of
-a password.
+## Extra Credit I'm Attempting
 
-The program doesn't protect against invalid data being added to the database.
+I'm attempting to make sure data being added or updated cannot be added to the database unless it is valid.
