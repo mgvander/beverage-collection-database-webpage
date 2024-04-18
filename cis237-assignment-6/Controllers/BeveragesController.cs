@@ -23,7 +23,29 @@ namespace cis237_assignment_6.Controllers
         // GET: Beverages
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Beverages.ToListAsync());
+            // Setup a variable to hold the beverages data.
+            DbSet<Beverage> beveragesToFilter = _context.Beverages;
+
+            // Setup some strings to hold the data that might be
+            // in the session. If there is nothing in the session
+            // we can still use these variables as a default.
+            string filterNameString = "";
+            string filterPackString = "";
+            string filterMinPriceString = "";
+            string filterMaxPriceString = "";
+
+            // Define a min and max for the price;
+            decimal minPriceDecimal = _context.Beverages.Min(beverage => beverage.Price);
+            decimal maxPriceDecimal = _context.Beverages.Max(beverage => beverage.Price);
+
+            // Check to see if there is a value in the session,
+            // and if there is, assign it to the filter variable
+            if (!String.IsNullOrWhiteSpace(HttpContext.Session.GetString("session_name")))
+            {
+                filterNameString = HttpContext.Session.GetString("session_name");
+            }
+
+            //return View(await _context.Beverages.ToListAsync());
         }
 
         // GET: Beverages/Details/5        

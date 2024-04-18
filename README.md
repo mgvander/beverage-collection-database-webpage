@@ -154,3 +154,5 @@ For development purposes, the program does not use HttpsRedirection(), which lea
 
 For development purposes, remove the requirements for a set length, inclusion of an alphanumeric character, inclusion of a digit, and inclusion of an uppercase letter, in the creation of
 a password.
+
+The Beverages Index has unfinished code for filtering through items.
