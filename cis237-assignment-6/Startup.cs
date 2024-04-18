@@ -40,13 +40,23 @@ namespace cis237_assignment_6
 
             // Configure the Identity Password Requirements to be more lax while in development.
             services.Configure<IdentityOptions>(options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequiredLength = 1;
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
 
-                });
+            });
+
+            // Configure the Session
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+                                   {
+                                       options.IdleTimeout = TimeSpan.FromMinutes(30);
+                                       options.Cookie.HttpOnly = true;
+                                       options.Cookie.IsEssential = true;
+                                   }
+                               );
 
         }
 
@@ -71,6 +81,8 @@ namespace cis237_assignment_6
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

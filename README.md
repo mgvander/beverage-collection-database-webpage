@@ -146,7 +146,7 @@ The following Bootstrap documentation should help you figure out how to add some
 
 ## Outside Resources Used
 
-None
+Database from barnesbrothers.ddns.net
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
@@ -155,4 +155,4 @@ For development purposes, the program does not use HttpsRedirection(), which lea
 For development purposes, remove the requirements for a set length, inclusion of an alphanumeric character, inclusion of a digit, and inclusion of an uppercase letter, in the creation of
 a password.
 
-The Beverages Index has unfinished code for filtering through items.
+The program doesn't protect against invalid data being added to the database.

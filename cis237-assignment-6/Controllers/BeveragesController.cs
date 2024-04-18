@@ -45,7 +45,65 @@ namespace cis237_assignment_6.Controllers
                 filterNameString = HttpContext.Session.GetString("session_name");
             }
 
-            //return View(await _context.Beverages.ToListAsync());
+            // Check to see if there is a value in the session,
+            // and if there is, assign it to the filter variable
+            if (!String.IsNullOrWhiteSpace(HttpContext.Session.GetString("session_pack")))
+            {
+                filterPackString = HttpContext.Session.GetString("session_pack");
+            }
+
+            // Check to see if there is a value in the session,
+            // and if there is, assign it to the filter variable
+            if (!String.IsNullOrWhiteSpace(HttpContext.Session.GetString("session_min_price")))
+            {
+                filterMinPriceString = HttpContext.Session.GetString("session_min_price");
+
+                try
+                {
+                    minPriceDecimal = Decimal.Parse(filterMinPriceString);
+                }
+                catch
+                {
+
+                }
+            }
+
+            // Check to see if there is a value in the session,
+            // and if there is, assign it to the filter variable
+            if (!String.IsNullOrWhiteSpace(HttpContext.Session.GetString("session_max_price")))
+            {
+                filterMaxPriceString = HttpContext.Session.GetString("session_max_price");
+
+                try
+                {
+                    maxPriceDecimal = Decimal.Parse(filterMaxPriceString);
+                }
+                catch
+                {
+
+                }
+            }
+
+            // Do the filter on the beveragesToFilter Dataset.
+            // Since we setup the default values for each of the
+            // filter parameters, we can count on this always
+            // running with no errors.
+            IList<Beverage> finalFilteredBeverage = await beveragesToFilter.Where(beverage => beverage.Name.Contains(filterNameString) &&
+                                                                                              beverage.Pack.Contains(filterPackString) &&
+                                                                                              (beverage.Price >= minPriceDecimal) &&
+                                                                                              (beverage.Price <= maxPriceDecimal)
+                                                                                 ).ToListAsync();
+
+            // Place the string representation of the values
+            // that are in the sesssion into the viewdata so
+            // that they can be retrieved and displayed on the view.
+            ViewData["filterName"] = filterNameString;
+            ViewData["filterPack"] = filterPackString;
+            ViewData["filterMinPrice"] = filterMinPriceString;
+            ViewData["filterMaxPrice"] = filterMaxPriceString;
+
+            // Return the view with the filtered selection of beverages.
+            return View(finalFilteredBeverage);
         }
 
         // GET: Beverages/Details/5        
@@ -179,6 +237,27 @@ namespace cis237_assignment_6.Controllers
             }
             
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Filter()
+        {
+            // Get the form data that we sent out of the request object.
+            // The string that is used as a key to get the data, matches
+            // the name property of the form control.
+            string nameString = HttpContext.Request.Form["name"];
+            string packString = HttpContext.Request.Form["pack"];
+            string minPriceString = HttpContext.Request.Form["min_price"];
+            string maxPriceString = HttpContext.Request.Form["max_price"];
+
+            // Now that the data pulled out from the request object has been retrieved,
+            // put it into the session so that the other methods can have access to it.
+            HttpContext.Session.SetString("session_name", nameString);
+            HttpContext.Session.SetString("session_pack", packString);
+            HttpContext.Session.SetString("session_min_price", minPriceString);
+            HttpContext.Session.SetString("session_max_price", maxPriceString);
+
+            // Redirect to the Index page
             return RedirectToAction(nameof(Index));
         }
 

@@ -5,6 +5,36 @@
 }
 
 <h1>Index</h1>
+@**@
+<div class="form-group">
+    <fieldset>
+        <legend>Search Filter</legend>
+        @*Open up a form that will go to the Filter method on the
+        BeveragesController with a POST request*@
+        @using (Html.BeginForm(
+            "Filter",    // Action method to run
+            "Beverages",    // Controller that method is on
+            FormMethod.Post    // The request type
+        ))
+        {
+            @*Render out the AntiForgery Token for the form*@
+            @Html.AntiForgeryToken()
+
+            <label for="name">Name</label>
+            @Html.TextBox("name", ViewData["filterName"])
+            <label for="pack">Pack</label>
+            @Html.TextBox("pack", ViewData["filterPack"])
+            <label for="min_price">Minimum Price</label>
+            @Html.TextBox("min_price", ViewData["filterMinPrice"])
+            <label for="max_price">Maximum Price</label>
+            @Html.TextBox("max_price", ViewData["filterMaxPrice"])
+
+            <input type="submit" value="Filter" class="btn btn-info pull-right" />
+        }
+    </fieldset>
+</div>
+<br />
+<br />
 @*Check that the user is logged in*@
 @if (User.Identity.IsAuthenticated)
 {
