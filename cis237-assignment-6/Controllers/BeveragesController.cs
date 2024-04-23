@@ -64,7 +64,6 @@ namespace cis237_assignment_6.Controllers
                 }
                 catch
                 {
-
                 }
             }
 
@@ -80,7 +79,6 @@ namespace cis237_assignment_6.Controllers
                 }
                 catch
                 {
-
                 }
             }
 
@@ -139,11 +137,12 @@ namespace cis237_assignment_6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Pack,Price,Active")] Beverage beverage)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(beverage);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));                               
             }
             return View(beverage);
         }
